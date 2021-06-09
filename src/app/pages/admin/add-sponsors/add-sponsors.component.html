@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-header-text">{{title}}</h5>
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" [routerLink]="['/sponsors-list']"><i class="icofont icofont-error close-card"></i></button>
+            </div>
+            <!-- <hr> -->
+            <div class="card-body">
+                <form [formGroup]="addsponsorForm">
+                    <input type="hidden" name="id" formControlName="id">
+                    <input type="hidden" name="role_type" formControlName="role_type">
+                    
+                    <div class="row">
+                        <div class="col-md-6" *ngIf="profileimageinput">
+                            <div class="form-group">
+                                <label>Profile Image</label>
+                                <input type="file" class="form-control" id="profile_image" name="profile_image" formControlName="profile_image" [ngClass]="{ 'is-invalid': submitted && c.profile_image.errors }" (change)="fileProgress($event)" />
+                                <div *ngIf="submitted && c.profile_image.errors" class="invalid-feedback">
+                                    <div *ngIf="c.profile_image.errors.required">Profile Image is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="profileimageshow">
+                            <div class="form-group">
+                                <label>Profile Image</label><br>
+                                <img src="{{profileimage_url}}" alt="image" style="height: 100px;width: 100px;border-radius: 50%;" onerror="this.onerror=null;this.src='assets/img/smd/logo.png';" />
+                                <button class="delete-entry btn btn-danger btn-sm" style="cursor: pointer;" (click)="deleteprofileImage()">
+                                            Delete</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="name">First Name</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-user"></i></label></span>
+                                <input type="text" class="form-control" placeholder="sponsor Name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && c.name.errors }">
+                                <div *ngIf="submitted && c.name.errors" class="invalid-feedback">
+                                    <div *ngIf="c.name.errors.required">First Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label>Last Name *</label>
+                            <div class="input-group ">
+                                <span class="input-group-prepend "><label class="input-group-text "><i class="icofont icofont-user "></i></label></span>
+                                <input type="text " class="form-control " placeholder="Last Name" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && c.last_name.errors } ">
+                                <div *ngIf="submitted && c.last_name.errors " class="invalid-feedback ">
+                                    <div *ngIf="c.last_name.errors.required ">Last Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="mobile">Mobile</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-phone"></i></label></span>
+                                <input type="text" class="form-control" placeholder="Mobile" formControlName="mobile" (keypress)="numberOnly($event)" maxlength="11" [ngClass]="{ 'is-invalid': submitted && c.mobile.errors }">
+                                <div *ngIf="submitted && c.mobile.errors" class="invalid-feedback">
+                                    <div *ngIf="c.mobile.errors.required">Mobile is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="team_name">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-email"></i></label></span>
+                                <input type="text" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && c.email.errors }">
+                                <div *ngIf="submitted && c.email.errors" class="invalid-feedback">
+                                    <div *ngIf="c.email.errors.required">Email is required</div>
+                                    <div *ngIf="c.email.errors.email">Email must be a valid email address</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <label for="zip_code ">Address 1 *</label>
+                            <div class="input-group ">
+                                <span class="input-group-prepend "><label class="input-group-text "><i class="icofont icofont-location-pin"></i></label></span>
+                                <input type="text " class="form-control " placeholder="Address 1" formControlName="address_one" [ngClass]="{ 'is-invalid': submitted && c.address_one.errors } ">
+                                <div *ngIf="submitted && c.address_one.errors " class="invalid-feedback ">
+                                    <div *ngIf="c.address_one.errors.required ">Address 1 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="zip_code ">Address 2 *</label>
+                            <div class="input-group ">
+                                <span class="input-group-prepend "><label class="input-group-text "><i class="icofont icofont-location-pin"></i></label></span>
+                                <input type="text " class="form-control " placeholder="Address 2" formControlName="address_two" [ngClass]="{ 'is-invalid': submitted && c.address_two.errors } ">
+                                <div *ngIf="submitted && c.address_two.errors " class="invalid-feedback ">
+                                    <div *ngIf="c.address_two.errors.required ">Address 2 is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="city">City *</label>
+                            <div class="input-group ">
+                                <span class="input-group-prepend "><label class="input-group-text "><i class="icofont icofont-location-pin"></i></label></span>
+                                <input type="text " class="form-control " placeholder="City" formControlName="city" [ngClass]="{ 'is-invalid': submitted && c.city.errors } ">
+                                <div *ngIf="submitted && c.city.errors " class="invalid-feedback ">
+                                    <div *ngIf="c.city.errors.required ">City is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="state">State *</label>
+                            <div class="input-group ">
+                                <span class="input-group-prepend "><label class="input-group-text "><i class="icofont icofont-location-pin"></i></label></span>
+                                <input type="text" class="form-control " placeholder="State" formControlName="state" [ngClass]="{ 'is-invalid': submitted && c.state.errors }">
+                                <div *ngIf="submitted && c.state.errors " class="invalid-feedback ">
+                                    <div *ngIf="c.state.errors.required ">State is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="zip_code ">Pin Code *</label>
+                            <div class="input-group ">
+                                <span class="input-group-prepend "><label class="input-group-text "><i class="icofont icofont-location-pin"></i></label></span>
+                                <input type="text " class="form-control " placeholder="Zip Code " formControlName="zip_code" [ngClass]="{ 'is-invalid': submitted && c.zip_code.errors } ">
+                                <div *ngIf="submitted && c.zip_code.errors " class="invalid-feedback ">
+                                    <div *ngIf="c.zip_code.errors.required ">Zip Code is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="status">Status</label>
+                            <select class="form-control " formControlName="status" [ngClass]="{ 'is-invalid': submitted && c.status.errors } ">
+                                <option value="1">Active</option>
+                                <option value="0">Not Active</option>
+                              </select>
+                            <div *ngIf="submitted && c.status.errors " class="invalid-feedback ">
+                                <div *ngIf="c.status.errors.required ">Status is required</div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="student">Select Student *</label>
+                                <ng-multiselect-dropdown class="ng-multiselect-dropdown" name="student" [placeholder]="'Select Student'" [data]="studentsarray" formControlName="student" [settings]="dropdownSettings" (onSelectAll)="onSelectAll($event)" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)"
+                                (click)="onCheck($event)" [ngClass]="{ 'is-invalid': submitted && c.student.errors }" style="padding: 14px 12px !important;">
+                            </ng-multiselect-dropdown>
+                                <!-- <select class="form-control" id="team" name="team" formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" multiple>
+                                    <option value="" selected>Select</option>
+                                    <option *ngFor="let t of teamsarray" [value]="t.id">{{t.team_name}}</option>
+               </select> -->
+                                <div *ngIf="submitted && c.student.errors" class="invalid-feedback">
+                                    <div *ngIf="c.student.errors.required">Student is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="text-right">
+                                <a href="javascript:;" class="btn btn-primary waves-effect waves-light" (click)="addsponsor()">{{submit_action}}</a>
+                                <!-- <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect" (click)="toggleEditProfile()">Cancel</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

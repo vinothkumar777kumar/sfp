@@ -1,0 +1,131 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Sponsor Students</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/sponsors-list']">Sponsors</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a >Sponsor Students</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card {{ fullCard }} {{ cardLoad }}" [ngClass]="cardClass">
+            <div class="card-header">
+                <h5 class="card-header-text">Sponsor Students</h5>
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" [routerLink]="['/sponsors-list']"><i class="icofont icofont-error close-card"></i></button>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Fees Details</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of sponsorstudentsarray;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{s.name}}</td>
+                                <td>
+                                    <span *ngIf="s.mobile != ''">{{s.mobile}}</span>
+                                    <span *ngIf="s.mobile == ''">No Details</span>
+                                </td>
+                                <td>
+                                    
+                                    <span *ngIf="s.email != ''">{{s.email}}</span>
+                                    <span *ngIf="s.email == ''">No Details</span>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="view_fees_details(s)"><i class="fa fa-eye"></i></a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="delete_sponsor_student(s)"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="emtysponsorstudent" style="text-align: center;">
+                                <td colspan="6">No Data Found</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="studenfeesmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="studenfeesmodal">
+                 Fees structure</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+         
+               <div class="table-responsive">
+                  <table class="table table-league">
+                      <thead>
+                          <tr>
+                              <th>No</th>
+                              <th>Fees Type</th>
+                              <th>Fees</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let f of feesdata;let i = index">
+                              <td>{{i + 1}}</td>
+                              <td>{{f.fees_type}}</td>
+                              <td><i class="fa fa-inr"></i> {{f.fees}}</td>                              
+                          </tr>
+                        
+                      </tbody>
+                  </table>
+              </div>
+  
+          </div>
+          <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" [disabled]="otptext===''" (click)="fn_verifiy_otp();" class="btn btn-primary">Verify</button> -->
+          </div>
+      </div>
+  </div>
+  </div>

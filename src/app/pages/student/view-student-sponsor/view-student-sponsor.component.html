@@ -1,0 +1,188 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Sponsor Details</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:void(0)">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="">SPonsor Details</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<!--profile cover start-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="cover-profile">
+            <div class="profile-bg-img">
+                <img class="profile-bg-img img-fluid" src="assets/images/user-profile/bg-img1.jpg" alt="bg-img">
+                <div class="card-body user-info">
+                    <div class="col-md-12">
+                        <div class="media-left">
+                            <a href="javascript:;" class="profile-image">
+                                <img class="user-img img-radius" [src]="profileimage_url" alt="user-img" onerror="this.onerror=null;this.src='assets/images/auth/no_user_img.png';">
+                            </a>
+                        </div>
+                        <div class="media-body row">
+                            <div class="col-lg-12">
+                                <div class="user-title">
+                                    <h2 style="text-transform: uppercase;">{{profiledata.fullName}}</h2>
+                                    <span class="text-white">Sponsor</span>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- <div class="pull-right cover-btn">
+                                    <button type="button" class="btn btn-primary m-b-10 m-r-10"><i class="icofont icofont-plus"></i> Follow</button>
+                                    <button type="button" class="btn btn-primary m-b-10"><i class="icofont icofont-ui-messaging"></i> Message</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--profile cover end-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="md-tabs">
+            <ngb-tabset>
+                <ngb-tab title="Personal Info">
+                    <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                            <!-- personal card start -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">Sponsor Details</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="view-info">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="general-info">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-xl-6">
+                                                            <div class="table-responsive">
+                                                                <table class="table m-0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row">Name</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.fullName != null">{{profiledata.fullName}}</span>
+                                                                                <span *ngIf="profiledata.fullName == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row ">Mobile Number</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.mobile != null">{{profiledata.mobile}}</span>
+                                                                                <span *ngIf="profiledata.mobile == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <!-- <tr>
+                                                                            <th scope="row">Gender</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.gender != null">{{profiledata.gender}}</span>
+                                                                                <span *ngIf="profiledata.gender == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr> -->
+                                                                    
+
+
+                                                                       
+
+                                                                        <!-- <tr>
+                                                                            <th scope="row ">Address</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.address != null">{{profiledata.address}}</span>
+                                                                                <span *ngIf="profiledata.address == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr> -->
+                                                                        <!-- <tr>
+                                                                            <th scope="row ">City</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.city != null">{{profiledata.city}}</span>
+                                                                                <span *ngIf="profiledata.city == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr> -->
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end of table col-lg-6 -->
+                                                        <div class="col-lg-12 col-xl-6 ">
+                                                            <div class="table-responsive ">
+                                                                <table class="table ">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row ">Email</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.email != null">{{profiledata.email}}</span>
+                                                                                <span *ngIf="profiledata.email == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <!-- <tr>
+                                                                            <th scope="row ">Zip Code</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.zip_code != null">{{profiledata.zip_code}}</span>
+                                                                                <span *ngIf="profiledata.zip_code == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                       
+                                                                        <tr>
+                                                                            <th scope="row ">State</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.state != null">{{profiledata.state}}</span>
+                                                                                <span *ngIf="profiledata.state == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr> -->
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end of table col-lg-6 -->
+                                                    </div>
+                                                    <!-- end of row -->
+                                                </div>
+                                                <!-- end of general info -->
+                                            </div>
+                                            <!-- end of col-lg-12 -->
+                                        </div>
+                                        <!-- end of row -->
+                                    </div>
+                                    <!-- end of view-info -->
+                                    
+                                    <!-- end of edit-info -->
+                                </div>
+                                <!-- end of card-body -->
+                            </div>
+                            <!-- personal card end-->
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+               
+            </ngb-tabset>
+        </div>
+    </div>
+</div>

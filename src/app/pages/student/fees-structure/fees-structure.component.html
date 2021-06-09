@@ -1,0 +1,80 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Fees Structure</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a>
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="">Fees structure</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-header-text">Fees Structure</h5>
+        <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" [routerLink]="['/add-fees-structure']">
+        <i class="icofont icofont-plus"></i>
+      </button>
+    </div>
+    <div class="card-body">
+        <div class="view-info">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="general-info">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12">
+                                <div class="table-responsive">
+                                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"class="table m-0 text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>Fees Type</th>
+                                                <th>Fees Per Semester</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let f of feesdata;let i = index">
+                                                <td>{{f.fees_type}}</td>
+                                                <td>
+                                                    <i class="fas fa-pound-sign"></i>&nbsp;&nbsp; <span>{{f.fees_per_semester}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="emptyfeesdataarray" style="text-align: center;">
+                                                <td colspan="2">No Data Found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of general info -->
+                </div>
+                <!-- end of col-lg-12 -->
+            </div>
+            <!-- end of row -->
+        </div>
+    </div>
+    <!-- end of card-body -->
+</div>

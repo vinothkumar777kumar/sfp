@@ -1,0 +1,196 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-wallet bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Financed</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a >Financed</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card {{ fullCard }} {{ cardLoad }}" [ngClass]="cardClass">
+            <div class="card-header">
+                <h5 class="card-header-text">Financed</h5>
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" (click)="viewbanktransaction()">View Bank Details</button>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Sponsor Name</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                                <!-- <th>Balance</th> -->
+                                <!-- <th>Email</th> -->
+                                <!-- <th>Mobile</th> -->
+                                <!-- <th>View Transaction</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let t of sponsordetails;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{t.name}}</td>
+                                <td><i class="fa fa-inr"></i> {{t.amount}}</td>
+                                <td>{{t.date}}</td>
+                                <td>
+                                    <span *ngIf="t.status == 1" class="label label-primary">Approved</span>
+                                    <span *ngIf="t.status == 2" class="label label-warning">Pending</span>
+                                </td>
+                                <td>
+                                    <button [attr.disabled]="t.status == 1 ? true : null" class="btn btn-sm btn-primary" href="javascript:void(0)" (click)="approve(t)">Approve</button>
+                                </td>
+                                <!-- <td><i class="fa fa-inr"></i> {{t.bal}}</td> -->
+                                <!-- <td>{{t.email}}</td> -->
+                                <!-- <td>{{t.mobile}}</td> -->
+                                
+                                <!-- <td>
+                                  
+                                    <a href="javascript:void(0)" (click)="viewtransactiondetails(t)">
+                                        <span  class="label label-primary"><i class="fa fa-eye"></i></span>
+                                    </a>
+                                </td> -->
+                            </tr>
+                            <tr *ngIf="emtysponsordetails" style="text-align: center;">
+                                <td colspan="6">No Data Found</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="sponsortransactionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-xl" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="sponsortransactionmodal">
+                Transaction Details</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+         <div class="modal-body">
+        
+              <div class="table-responsive">
+                 <table class="table table-league">
+                     <thead>
+                         <tr>
+                             <th>No</th>
+                             <th>Amount</th>
+                             <th>Date</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr *ngFor="let t of transactiondata;let i = index">
+                             <td>{{i + 1}}</td>
+                             <td><i class="fa fa-inr"></i> {{t.amount}}</td>
+                             <td>{{t.date}}</td>                              
+                         </tr>
+                       
+                     </tbody>
+                 </table>
+             </div>
+ 
+         </div>
+         <div class="modal-footer">
+             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button type="button" [disabled]="otptext===''" (click)="fn_verifiy_otp();" class="btn btn-primary">Verify</button> -->
+         </div>
+     </div>
+ </div>
+ </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="banktransactionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="banktransactionmodal">
+                 Transaction Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+         
+               <div class="table-responsive">
+                  <table  class="table table-league">
+                      <tbody>
+                          <tr>
+                              <td>Bank Balance</td>
+                              <td><i class="fa fa-inr"></i> {{bank_bal}}</td>                              
+                          </tr>
+                        
+                      </tbody>
+                  </table>
+                  <table class="table table-league">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Sponsor Name</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let t of transactiondata;let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{t.name}}</td>
+                            <td><i class="fa fa-inr"></i> {{t.amount}}</td>
+                            <td>
+                                <span *ngIf="t.status == 1" class="label label-primary">Approved</span>
+                                <span *ngIf="t.status == 2" class="label label-warning">Pending</span>
+                            </td>
+                            <td>{{t.date}}</td>                              
+                        </tr>
+                      
+                    </tbody>
+                </table>
+              </div>
+  
+          </div>
+          <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" [disabled]="otptext===''" (click)="fn_verifiy_otp();" class="btn btn-primary">Verify</button> -->
+          </div>
+      </div>
+  </div>
+  </div>
+

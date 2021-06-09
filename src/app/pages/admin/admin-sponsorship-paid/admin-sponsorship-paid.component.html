@@ -1,0 +1,156 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block">
+                            <h4>Student Sponsorship</h4>
+                        </span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/sponsor-students-list']">Sponsor Students</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="">Student Sponsorship</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-header-text">Student Fees Details</h5>
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button"
+                    [routerLink]="['/students-list']"><i class="icofont icofont-error close-card"></i></button>
+            </div>
+            <!-- <hr> -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-league">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Fees Type</th>
+                                <th>Fees</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let f of feesdata;let i = index">
+                                <td>{{i + 1}}</td>
+                                <td>{{f.fees_type}}</td>
+                                <td><i class="fa fa-inr"></i> {{f.fees}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Total</td>
+                                <td><i class="fa fa-inr"></i> {{total_fee}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <form [formGroup]="paysponsorshipform">
+                    <input type="hidden" name="student_id" formControlName="student_id">
+                    <input type="hidden" name="sponsor_id" formControlName="sponsor_id">
+                    <input type="hidden" name="total_fees" formControlName="total_fees">
+                    <input type="hidden" name="paid_status" formControlName="paid_status">
+                    <div class="row ">
+                        <!-- <div class="col-md-6" *ngIf="profileimageinput">
+                            <div class="form-group">
+                                <label>Profile Image</label>
+                                <input type="file" class="form-control" id="profile_image" name="profile_image" formControlName="profile_image" [ngClass]="{ 'is-invalid': submitted && c.profile_image.errors }" (change)="fileProgress($event)" />
+                                <div *ngIf="submitted && c.profile_image.errors" class="invalid-feedback">
+                                    <div *ngIf="c.profile_image.errors.required">Profile Image is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="profileimageshow">
+                            <div class="form-group">
+                                <label>Profile Image</label><br>
+                                <img src="{{profileimage_url}}" alt="image" style="height: 100px;width: 100px;border-radius: 50%;" onerror="this.onerror=null;this.src='assets/img/smd/logo.png';" />
+                                <button class="delete-entry btn btn-danger btn-sm" style="cursor: pointer;" (click)="deleteprofileImage()">
+                                            Delete</button>
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-6 ">
+                            <label for="pay_date ">Pay Date *</label>
+                            <div class="input-group ">
+                                <!-- <span class="input-group-prepend "><label class="input-group-text "><i class="icofont icofont-calendar "></i></label></span> -->
+                                <input angular-mydatepicker type="text " class="form-control "
+                                    placeholder="Select Date " formControlName="pay_date"
+                                    [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event,'pay_date') "
+                                    #dp="angular-mydatepicker" disabled style="background-color: #fff; "
+                                    [ngClass]="{ 'is-invalid': submitted && c.pay_date.errors } ">
+                                <div class="input-group-append ">
+                                    <span class="input-group-text ">
+                                        <a style="cursor: pointer; " class="fa fa-calendar "
+                                            (click)="dp.toggleCalendar() "></a></span>
+                                </div>
+                                <div *ngIf="submitted && c.pay_date.errors " class="invalid-feedback ">
+                                    <div *ngIf="c.pay_date.errors.required ">Pay is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="paid">Paid *</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="paid" name="paid" formControlName="paid"
+                                        [ngClass]="{ 'is-invalid': submitted && c.paid.errors }"
+                                        (keypress)="numberOnly($event)" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <a style="cursor: pointer;" class="fa fa-inr"></a></span>
+                                    </div>
+                                    <div *ngIf="submitted && c.paid.errors" class="invalid-feedback">
+                                        <div *ngIf="c.paid.errors.required">paid is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="text-right ">
+                                <a href="javascript:;" class="btn btn-primary waves-effect waves-light"
+                                    (click)="paysponsorship()">Pay</a>
+                                <!-- <a href="javascript:; " id="edit-cancel " class="btn btn-default waves-effect " (click)="toggleEditProfile() ">Cancel</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                    <br>
+                    
+
+
+                       
+                    
+
+
+
+            </div>
+
+            <!-- {{addstudentForm.value | json}} -->
+        </div>
+    </div>
+
+</div>

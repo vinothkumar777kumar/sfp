@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-header-text">{{title}}</h5>
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" [routerLink]="['/sponsor-wallet-details']"><i class="icofont icofont-error close-card"></i></button>
+            </div>
+            <!-- <hr> -->
+            <div class="card-body">
+                <form [formGroup]="addsponsorwallettransactionForm">
+                    <input type="hidden" name="id" formControlName="id">
+                    <input type="hidden" name="sponsor_id" formControlName="sponsor_id">
+                    <input type="hidden" name="prev_amt" formControlName="prev_amt">
+                    <input type="hidden" name="status" formControlName="status">
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="amount">Transaction Amount</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-inr"></i></label></span>
+                                <input type="text" class="form-control" placeholder="Transaction Amount" formControlName="amount" (keypress)="numberOnly($event)" [ngClass]="{ 'is-invalid': submitted && c.amount.errors }">
+                                <div *ngIf="submitted && c.amount.errors" class="invalid-feedback">
+                                    <div *ngIf="c.amount.errors.required">Transaction amount is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="date">Date *</label>
+                            <div class="input-group">
+                                <!-- <span class="input-group-prepend"><label class="input-group-text"><i class="icofont icofont-calendar"></i></label></span> -->
+                                <input angular-mydatepicker type="text" class="form-control"
+                                    placeholder="Select Date" formControlName="date"
+                                    [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event,'transaction_date')"
+                                    #dp="angular-mydatepicker" disabled style="background-color: #fff;"
+                                    [ngClass]="{ 'is-invalid': submitted && c.date.errors }">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <a style="cursor: pointer;" class="fa fa-calendar"
+                                            (click)="dp.toggleCalendar()"></a></span>
+                                </div>
+                                <div *ngIf="submitted && c.date.errors" class="invalid-feedback">
+                                    <div *ngIf="c.date.errors.required">date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                  
+                        <div class="col-md-12">
+                            <div class="text-right">
+                                <a href="javascript:;" class="btn btn-primary waves-effect waves-light" (click)="addtransaction()">{{submit_action}}</a>
+                                <!-- <a href="javascript:;" id="edit-cancel" class="btn btn-default waves-effect" (click)="toggleEditProfile()">Cancel</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,274 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Students Approval</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="">Student Approval</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="md-tabs">
+            <ngb-tabset (tabChange)="fetchNews($event)">
+            
+                <ngb-tab title="Approval student">
+                    <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                            <!-- personal card start -->
+                            <div class="card">
+                                <!-- <div class="card-header">
+                                    <h5 class="card-header-text">Profile</h5>
+                                    <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="toggleEditProfile()">
+                                    <i class="icofont {{ editProfileIcon }}"></i>
+                                  </button>
+                                </div> -->
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Student Name</th>
+                                                    <!-- <th>Gender</th> -->
+                                                    <!-- <th>Date of Birth</th> -->
+                                                    <th>Mobile</th>
+                                                    <th>Email</th>
+                                                    <th>College/University</th>
+                                                    <th>Status</th>
+                                                    <!-- <th>Approval</th>
+                                                    <th>Pending</th>
+                                                    <th>Reject</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let s of approvalstudent;let i = index">
+                                                    <th scope="row">{{i + 1}}</th>
+                                                    <td>
+                                                        <span *ngIf="s.name != 'null'">{{s.name}}</span>
+                                                        <span *ngIf="s.name == 'null'">No Detail</span>
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.mobile != 'null'">{{s.mobile}}</span>
+                                                        <span *ngIf="s.mobile == 'null' || s.mobile == null || s.mobile == ''">No Detail</span>
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.email != 'null'">{{s.email}}</span>
+                                                        <span *ngIf="s.email == 'null' || s.email == null || s.email == ''">No Detail</span>
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.collegeofstudy != 'null'">{{s.collegeofstudy}}</span>
+                                                        <span *ngIf="s.collegeofstudy == 'null' || s.collegeofstudy == null || s.collegeofstudy == ''">No Detail</span>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.approval == 1" class="label label-primary">Approval</span>
+                                                        <!-- <span *ngIf="s.status == 0" class="label label-warning">Non-Active</span> -->
+                                                    </td>
+                                                    
+                                                    <!-- <td>
+                                                        <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'approval')" class="btn btn-success">Approval</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'pending')" class="btn btn-warning">Pending</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'reject')" class="btn btn-danger">Reject</a>
+                                                    </td> -->
+                                                </tr>
+                                                <!-- <tr *ngIf="approvalstudent.length == 0" style="text-align: center;">
+                                                    <td colspan="6">No Data Found</td>
+                                                </tr> -->
+                    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                  
+                                </div>
+                                <!-- end of card-body -->
+                            </div>
+                            <!-- personal card end-->
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Pending Student">
+                    <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                            <!-- info card start -->
+                            <div class="card">
+                                <!-- <div class="card-header">
+                                    <h5 class="card-header-text">College Details</h5>
+                                </div> -->
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                        <table *ngIf="isShowpending" datatable [dtOptions]="dtOptions1" [dtTrigger]="dtTrigger1" class="table table-hover text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Student Name</th>
+                                                    <!-- <th>Gender</th> -->
+                                                    <!-- <th>Date of Birth</th> -->
+                                                    <th>Mobile</th>
+                                                    <th>Email</th>
+                                                    <th>College/University</th>
+                                                    <th>Status</th>
+                                                    <!-- <th>Approval</th>
+                                                    <th>Pending</th>
+                                                    <th>Reject</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let s of pendingstudentsarray;let i = index">
+                                                    <th scope="row">{{i + 1}}</th>
+                                                    <td>
+                                                        <span *ngIf="s.name != 'null'">{{s.name}}</span>
+                                                        <span *ngIf="s.name == 'null'">No Detail</span>
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.mobile != 'null'">{{s.mobile}}</span>
+                                                        <span *ngIf="s.mobile == 'null' || s.mobile == null || s.mobile == ''">No Detail</span>
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.email != 'null'">{{s.email}}</span>
+                                                        <span *ngIf="s.email == 'null' || s.email == null || s.email == ''">No Detail</span>
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.collegeofstudy != 'null'">{{s.collegeofstudy}}</span>
+                                                        <span *ngIf="s.collegeofstudy == 'null' || s.collegeofstudy == null || s.collegeofstudy == ''">No Detail</span>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        <span *ngIf="s.pending == 1" class="label label-warning">Pending</span>
+                                                        <!-- <span *ngIf="s.status == 0" class="label label-warning">Non-Active</span> -->
+                                                    </td>
+                                                    
+                                                    <!-- <td>
+                                                        <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'approval')" class="btn btn-success">Approval</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'pending')" class="btn btn-warning">Pending</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'reject')" class="btn btn-danger">Reject</a>
+                                                    </td> -->
+                                                </tr>
+                                                <!-- <tr *ngIf="pendingstudentsarray.length == 0" style="text-align: center;">
+                                                    <td colspan="6">No Data Found</td>
+                                                </tr> -->
+                    
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- info card end -->
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Rejected student">
+                    <ng-template ngbTabContent>
+                        <div class="m-t-15">
+                            <div class="card">
+                                <!-- <div class="card-header">
+                                    <h5 class="card-header-text">Course Details</h5>
+                                </div> -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table datatable [dtOptions]="dtOptions2" [dtTrigger]="dtTrigger2" class="table table-hover text-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Student Name</th>
+                                                            <!-- <th>Gender</th> -->
+                                                            <!-- <th>Date of Birth</th> -->
+                                                            <th>Mobile</th>
+                                                            <th>Email</th>
+                                                            <th>College/University</th>
+                                                            <th>Status</th>
+                                                            <!-- <th>Approval</th>
+                                                            <th>Pending</th>
+                                                            <th>Reject</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let s of rejectedstudentsarray;let i = index">
+                                                            <th scope="row">{{i + 1}}</th>
+                                                            <td>
+                                                                <span *ngIf="s.name != 'null'">{{s.name}}</span>
+                                                                <span *ngIf="s.name == 'null'">No Detail</span>
+                                                            </td>
+                                                            <td>
+                                                                <span *ngIf="s.mobile != 'null'">{{s.mobile}}</span>
+                                                                <span *ngIf="s.mobile == 'null' || s.mobile == null || s.mobile == ''">No Detail</span>
+                                                            </td>
+                                                            <td>
+                                                                <span *ngIf="s.email != 'null'">{{s.email}}</span>
+                                                                <span *ngIf="s.email == 'null' || s.email == null || s.email == ''">No Detail</span>
+                                                            </td>
+                                                            <td>
+                                                                <span *ngIf="s.collegeofstudy != 'null'">{{s.collegeofstudy}}</span>
+                                                                <span *ngIf="s.collegeofstudy == 'null' || s.collegeofstudy == null || s.collegeofstudy == ''">No Detail</span>
+                                                                
+                                                            </td>
+                                                            <td>
+                                                                <span *ngIf="s.reject == 1" class="label label-danger">Rejected</span>
+                                                                <!-- <span *ngIf="s.status == 0" class="label label-warning">Non-Active</span> -->
+                                                            </td>
+                                                            
+                                                            <!-- <td>
+                                                                <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'approval')" class="btn btn-success">Approval</a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'pending')" class="btn btn-warning">Pending</a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'reject')" class="btn btn-danger">Reject</a>
+                                                            </td> -->
+                                                        </tr>
+                                                        <!-- <tr *ngIf="rejectedstudentsarray.length == 0" style="text-align: center;">
+                                                            <td colspan="6">No Data Found</td>
+                                                        </tr> -->
+                            
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- end of general info -->
+                                        </div>
+                                        <!-- end of col-lg-12 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</div>

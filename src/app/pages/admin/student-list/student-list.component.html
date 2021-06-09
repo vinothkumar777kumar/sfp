@@ -1,0 +1,476 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Student</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/students-list']">Students</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card {{ fullCard }} {{ cardLoad }}" [ngClass]="cardClass">
+            <div class="card-header">
+                <h5 class="card-header-text">Students List</h5>
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" (click)="addstudent()"><i  class="icofont icofont-plus"></i></button>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Student Name</th>
+                                <!-- <th>Gender</th> -->
+                                <!-- <th>Date of Birth</th> -->
+                                <!-- <th>Mobile</th> -->
+                                <th>Email</th>
+                                <th>College/University</th>
+                                <th>Course</th>
+                                <th>Revel Sponsor Details</th>
+                                <!-- <th>Status</th> -->
+                                <th>Paid Details</th>
+                                <th>Fees Details</th>
+                                <th>Change Passowrd</th>
+                                <th>View</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of studentsarray;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>
+                                    <span *ngIf="s.name != 'null'">{{s.name}}</span>
+                                    <span *ngIf="s.name == 'null'">No Detail</span>
+                                </td>
+                                <!-- <td>
+                                    <span *ngIf="s.gender != 'null'">{{s.gender}}</span>
+                                    <span *ngIf="s.gender == 'null'">No Detail</span>
+                                    <span *ngIf="s.gender == null">No Detail</span>
+                                </td> -->
+                                <!-- <td>
+                                    <span *ngIf="s.dateofbirth != 'null'">{{s.dateofbirth}}</span>
+                                    <span *ngIf="s.dateofbirth == 'null' || s.dateofbirth == null || s.dateofbirth == ''">No Detail</span>
+                                </td> -->
+                                <!-- <td>
+                                    <span *ngIf="s.mobile != 'null'">{{s.mobile}}</span>
+                                    <span *ngIf="s.mobile == 'null' || s.mobile == null || s.mobile == ''">No Detail</span>
+                                </td> -->
+                                <td>
+                                    <span *ngIf="s.email != 'null'">{{s.email}}</span>
+                                    <span *ngIf="s.email == 'null' || s.email == null || s.email == ''">No Detail</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="s.collegeofstudy != 'null'">{{s.collegeofstudy}}</span>
+                                    <span *ngIf="s.collegeofstudy == 'null' || s.collegeofstudy == null || s.collegeofstudy == ''">No Detail</span>
+                                    
+                                </td>
+                                <td>
+                                    <span *ngIf="s.course_name != 'null'">{{s.course_name}}</span>
+                                    <span *ngIf="s.course_name == 'null' || s.course_name == null || s.course_name == ''">No Detail</span>
+                                    
+                                </td>
+                                <td>
+                                  
+                                    <a class="btn btn-sm btn-primary" href="javascript:void(0)" (click)="revel_request(s)">
+                                        Revel Sponsor Details
+                                    </a>
+                                </td>
+                                <!-- <td>
+                                    <span *ngIf="s.status == 1" class="label label-primary">Active</span>
+                                    <span *ngIf="s.status == 0" class="label label-warning">Non-Active</span>
+                                </td> -->
+                                <td>
+                                  
+                                    <a href="javascript:void(0)" (click)="viewpaiddetails(s)">
+                                        <span  class="label label-primary"><i class="fa fa-eye"></i></span>
+                                    </a>
+                                </td>
+                                   <td>
+                                  
+                                    <a href="javascript:void(0)" (click)="paysponsorship(s)">
+                                        <span  class="label label-primary">View & pay</span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="changepassword(s)"><i class="fa fa-edit"></i></a>
+                                </td>
+                                <td>
+                                  
+                                    <a href="javascript:void(0)" (click)="viewstudentdetails(s)">
+                                        <span  class="label label-primary"><i class="fa fa-eye"></i></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="edit_student(s)"><i class="fa fa-edit"></i></a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="delete_student(s)"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="emptystudentsarray" style="text-align: center;">
+                                <td colspan="12">No Data Found</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="feespaidmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-xl" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="studenfeesmodal">
+                Paid Details</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+         <div class="modal-body">
+        
+              <div class="table-responsive">
+                 <table class="table table-league">
+                     <thead>
+                         <tr>
+                             <th>No</th>
+                             <th>Pay Date</th>
+                             <th>paid</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr *ngFor="let f of feespaiddata;let i = index">
+                             <td>{{i + 1}}</td>
+                             <td>{{f.pay_date}}</td>
+                             <td><i class="fa fa-inr"></i> {{f.paid}}</td>                              
+                         </tr>
+                       <tr *ngIf="feespaiddata.length == 0">
+                           <td colspan="3" style="text-align: center;">No Paid Details</td>
+                       </tr>
+                     </tbody>
+                 </table>
+             </div>
+ 
+         </div>
+         <div class="modal-footer">
+             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button type="button" [disabled]="otptext===''" (click)="fn_verifiy_otp();" class="btn btn-primary">Verify</button> -->
+         </div>
+     </div>
+ </div>
+ </div>
+  <!-- Modal -->
+  <div class="modal fade" id="studentmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="studentmodal">
+                 Student Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-lg-12">
+                    <h5 class="card-header-text">Personal details</h5>
+                  </div>
+         <div class="col-lg-6">
+            <div class="table-responsive">
+                <table class="table table-league">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Full Name</th>
+                            <td>
+                                <span *ngIf="studendata.name != null">{{studendata.name}}</span>
+                                <span *ngIf="studendata.name == null">No Detail</span>
+                                <span *ngIf="studendata.name == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gender</th>
+                            <td>
+                                <span *ngIf="studendata.gender != null">{{studendata.gender}}</span>
+                                <span *ngIf="studendata.gender == null">No Detail</span>
+                                <span *ngIf="studendata.gender == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Father/Guardian</th>
+                            <td>
+                                <span *ngIf="studendata.fatherorguardian_name != null">{{studendata.fatherorguardian_name}}</span>
+                                <span *ngIf="studendata.fatherorguardian_name == null">No Detail</span>
+                                <span *ngIf="studendata.fatherorguardian_name == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Father/Guardian Mobile</th>
+                            <td>
+                                <span *ngIf="studendata.fatherorgardian_mobile != null">{{studendata.fatherorgardian_mobile}}</span>
+                                <span *ngIf="studendata.fatherorgardian_mobile == null">No Detail</span>
+                                <span *ngIf="studendata.fatherorgardian_mobile == ''">No Detail</span>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <th scope=" row ">Birth Date</th>
+                            <td><span *ngIf="studendata.dateofbirth != null">{{studendata.dateofbirth}}</span>
+                                <span *ngIf="studendata.dateofbirth == null">No Detail</span>
+                                <span *ngIf="studendata.dateofbirth == ''">No Detail</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row ">Address</th>
+                            <td>
+                                <span *ngIf="studendata.address != null">{{studendata.address}}</span>
+                                <span *ngIf="studendata.address == null">No Detail</span>
+                                <span *ngIf="studendata.address == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        
+                      
+                    </tbody>
+                </table>
+            </div>
+         </div>
+         <div class="col-lg-6">
+            <div class="table-responsive ">
+                <table class="table ">
+                    <tbody>
+                        <tr>
+                            <th scope="row ">Email</th>
+                            <td>
+                                <span *ngIf="studendata.email != null">{{studendata.email}}</span>
+                                <span *ngIf="studendata.email == null">No Detail</span>
+                                <span *ngIf="studendata.email == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row ">Mobile Number</th>
+                            <td>
+                                <span *ngIf="studendata.mobile != null">{{studendata.mobile}}</span>
+                                <span *ngIf="studendata.mobile == null">No Detail</span>
+                                <span *ngIf="studendata.mobile == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row ">Zip Code</th>
+                            <td>
+                                <span *ngIf="studendata.zip_code != null">{{studendata.zip_code}}</span>
+                                <span *ngIf="studendata.zip_code == null">No Detail</span>
+                                <span *ngIf="studendata.zip_code == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row ">City</th>
+                            <td>
+                                <span *ngIf="studendata.city != null">{{studendata.city}}</span>
+                                <span *ngIf="studendata.city == null">No Detail</span>
+                                <span *ngIf="studendata.city == ''">No Detail</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row ">State</th>
+                            <td>
+                                <span *ngIf="studendata.state != null">{{studendata.state}}</span>
+                                <span *ngIf="studendata.state == null">No Detail</span>
+                                <span *ngIf="studendata.state == ''">No Detail</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         </div>
+         <div class="col-lg-12">
+            <h5 class="card-header-text">College details</h5>
+          </div>
+ <div class="col-lg-6">
+    <div class="table-responsive">
+        <table class="table m-0">
+            <tbody>
+                <tr>
+                    <th scope="row">College Name</th>
+                    <td>
+                        <span *ngIf="studendata.collegeofstudy != null">{{studendata.collegeofstudy}}</span>
+                        <span *ngIf="studendata.collegeofstudy == null">No Detail</span>
+                        <span *ngIf="studendata.collegeofstudy == ''">No Detail</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Contact</th>
+                    <td>
+                        <span *ngIf="studendata.college_phone != null">{{studendata.college_phone}}</span>
+                        <span *ngIf="studendata.college_phone == null">No Detail</span>
+                        <span *ngIf="studendata.college_phone == ''">No Detail</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>
+                        <span *ngIf="studendata.college_email != null">{{studendata.college_email}}</span>
+                        <span *ngIf="studendata.college_email == null">No Detail</span>
+                        <span *ngIf="studendata.college_email == ''">No Detail</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Address</th>
+                    <td>
+                        <span *ngIf="studendata.college_address != null">{{studendata.college_address}}</span>
+                        <span *ngIf="studendata.college_address == null">No Detail</span>
+                        <span *ngIf="studendata.college_address == ''">No Detail</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">City</th>
+                    <td>
+                        <span *ngIf="studendata.college_city != null">{{studendata.college_city}}</span>
+                        <span *ngIf="studendata.college_city == null">No Detail</span>
+                        <span *ngIf="studendata.college_city == ''">No Detail</span>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+ </div>
+ <div class="col-lg-6">
+    <div class="table-responsive ">
+        <table class="table ">
+            <tbody>
+                <tr>
+                    <th scope="row ">State</th>
+                    <td>
+                        <span *ngIf="studendata.college_state != null">{{studendata.college_state}}</span>
+                        <span *ngIf="studendata.college_state == null">No Detail</span>
+                        <span *ngIf="studendata.college_state == ''">No Detail</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row ">Pin code</th>
+                    <td>
+                        <span *ngIf="studendata.college_zip_code != null">{{studendata.college_zip_code}}</span>
+                        <span *ngIf="studendata.college_zip_code == null">No Detail</span>
+                        <span *ngIf="studendata.college_zip_code == ''">No Detail</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row ">Contact person</th>
+                    <td>
+                        <span *ngIf="studendata.contact_person != null">{{studendata.contact_person}}</span>
+                        <span *ngIf="studendata.contact_person == null">No Detail</span>
+                        <span *ngIf="studendata.contact_person == ''">No Detail</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row ">Contact person Mobile</th>
+                    <td>
+                        <span *ngIf="studendata.contact_person_mobile != null">{{studendata.contact_person_mobile}}</span>
+                        <span *ngIf="studendata.contact_person_mobile == null">No Detail</span>
+                        <span *ngIf="studendata.contact_person_mobile == ''">No Detail</span>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+ </div>
+ <div class="col-lg-12">
+    <h5 class="card-header-text">Course Details</h5>
+  </div>
+<div class="col-lg-6">
+    <div class="table-responsive">
+        <table class="table m-0">
+            <tbody>
+                <tr>
+                    <th scope="row">Course Name</th>
+                    <td>
+                        <span *ngIf="studendata.course_name != null">{{studendata.course_name}}</span>
+                        <span *ngIf="studendata.course_name == null">No Detail</span>
+                        <span *ngIf="studendata.course_name == ''">No Detail</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Course duration</th>
+                    <td>
+                        <span *ngIf="studendata.study_duration != null">{{studendata.study_duration}}</span>
+                        <span *ngIf="studendata.study_duration == null">No Detail</span>
+                        <span *ngIf="studendata.study_duration == ''">No Detail</span>
+                    </td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-lg-6">
+    <div class="table-responsive ">
+        <table class="table ">
+            <tbody>
+                <tr>
+                    <th scope="row ">Academic Year</th>
+                    <td>
+                        <span *ngIf="studendata.academic_year != null">{{studendata.academic_year}}</span>
+                        <span *ngIf="studendata.academic_year == null">No Detail</span>
+                        <span *ngIf="studendata.academic_year == ''">No Detail</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Join date</th>
+                    <td>
+                        <span *ngIf="studendata.join_date != null">{{studendata.join_date}}</span>
+                        <span *ngIf="studendata.join_date == null">No Detail</span>
+                        <span *ngIf="studendata.join_date == ''">No Detail</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+            </div>  
+  
+          </div>
+          <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" [disabled]="otptext===''" (click)="fn_verifiy_otp();" class="btn btn-primary">Verify</button> -->
+          </div>
+      </div>
+  </div>
+  </div>

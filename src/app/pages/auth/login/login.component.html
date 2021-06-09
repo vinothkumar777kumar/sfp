@@ -1,0 +1,18 @@
+<div class="signin-content">
+
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <p>Please login to continue</p>
+
+        <input matInput placeholder="User" formControlName="userName" required>
+
+
+
+        <input matInput type="password" placeholder="Password" formControlName="password" required>
+
+
+        <button mat-raised-button color="primary">Login</button>
+    </form>
+
+
+</div>

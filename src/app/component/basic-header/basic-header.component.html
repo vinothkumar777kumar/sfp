@@ -1,0 +1,60 @@
+<nav class="fh5co-nav" role="navigation">
+    <!-- <div class="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <p class="site">www.yourdomainname.com</p>
+                    <p class="num">Call: +01 123 456 7890</p>
+                    <ul class="fh5co-social">
+                        <li><a href="#"><i class="icon-facebook2"></i></a></li>
+                        <li><a href="#"><i class="icon-twitter2"></i></a></li>
+                        <li><a href="#"><i class="icon-dribbble2"></i></a></li>
+                        <li><a href="#"><i class="icon-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="top-menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">
+                    <div id="fh5co-logo"><a [routerLink]="['/home']"><i class="icon-study"></i>Educ<span>.</span></a></div>
+                </div>
+                <div class="col-xs-10 text-right menu-1">
+                    <ul>
+                        <li class="active"><a [routerLink]="['/home']">Home</a></li>
+                        <!-- <li><a [routerLink]="['/home']">Courses</a></li> -->
+                        <!-- <li><a [routerLink]="['/home']">Teacher</a></li> -->
+                        <!-- <li><a [routerLink]="['/home']">About</a></li> -->
+                        <!-- <li><a [routerLink]="['/home']">Pricing</a></li> -->
+                        <!-- <li class="has-dropdown">
+                            <a [routerLink]="['/courses']">Blog</a>
+                            <ul class="dropdown">
+                                <li><a [routerLink]="['/courses']">Web Design</a></li>
+                                <li><a [routerLink]="['/courses']">eCommerce</a></li>
+                                <li><a [routerLink]="['/courses']">Branding</a></li>
+                                <li><a [routerLink]="['/courses']">API</a></li>
+                            </ul>
+                        </li> -->
+                        <!-- <li><a [routerLink]="['/courses']">Contact</a></li> *ngIf="IsLoggedIn$.source.value" -->
+
+                        <li><a [routerLink]="['/myaccount']">Myaccount</a></li>
+
+                        <li class="btn-cta">
+                            <a [routerLink]="['/login']"><span>Login</span></a>
+                        </li>
+
+                        <li class="btn-cta">
+                            <a (click)="onLogout()"><span>Logout</span></a>
+                        </li>
+                        <li class="btn-cta"><a [routerLink]="['/login']"><span>Register</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>

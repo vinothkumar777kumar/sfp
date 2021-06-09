@@ -1,0 +1,175 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Student Pending Approval List</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="javascript:void(0)">Students Pending Approval List</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card {{ fullCard }} {{ cardLoad }}" [ngClass]="cardClass">
+            <div class="card-header">
+                <h5 class="card-header-text">Students Pending Approval List</h5>
+                <!-- <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" (click)="addstudent()"><i  class="icofont icofont-plus"></i></button> -->
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Student Name</th>
+                                <!-- <th>Gender</th> -->
+                                <!-- <th>Date of Birth</th> -->
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>College/University</th>
+                                <th>Course Name</th>
+                                <th>Sponsor</th>
+                                <th>Assign</th>
+                                <th>Approved</th>
+                                <th>Pending</th>
+                                <th>Reject</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of pendingapprovalstudentsarray;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>
+                                    <span *ngIf="s.name != 'null'">{{s.name}}</span>
+                                    <span *ngIf="s.name == 'null'">No Detail</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="s.mobile != 'null'">{{s.mobile}}</span>
+                                    <span *ngIf="s.mobile == 'null' || s.mobile == null || s.mobile == ''">No Detail</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="s.email != 'null'">{{s.email}}</span>
+                                    <span *ngIf="s.email == 'null' || s.email == null || s.email == ''">No Detail</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="s.collegeofstudy != 'null'">{{s.collegeofstudy}}</span>
+                                    <span *ngIf="s.collegeofstudy == 'null' || s.collegeofstudy == null || s.collegeofstudy == ''">No Detail</span>
+                                    
+                                </td>
+                                <td>
+                                    <span *ngIf="s.course_name != 'null'">{{s.course_name}}</span>
+                                    <span *ngIf="s.course_name == 'null' || s.course_name == null || s.course_name == ''">No Detail</span>
+                                    
+                                </td>
+                                <!-- <td>
+                                    <span *ngIf="s.status == 1" class="label label-primary">Active</span>
+                                    <span *ngIf="s.status == 0" class="label label-warning">Non-Active</span>
+                                </td> -->
+                                <td>
+                                    <a href="javascript:void(0)" (click)="view_student_sponsor(s)"><i class="fa fa-eye"></i></a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="assign_sponsor(s)"><i class="fa fa-tasks"></i></a>
+                                </td>
+                                <td>
+                                    <button href="javascript:void(0)" [attr.disabled]="s.is_sponsored_student == null ? true : null" (click)="changeapprovalstatus(s,'approval')" class="btn btn-sm btn-success">Approved</button>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'pending')" class="btn btn-sm btn-warning">Pending</a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="changeapprovalstatus(s,'reject')" class="btn btn-sm btn-danger">Reject</a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="emptystudentsarray" style="text-align: center;">
+                                <td colspan="10">No Data Found</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="sponsormodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-lg" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="sponsormodal">
+                Sponsor Details</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+         <div class="modal-body">
+        
+              <div class="table-responsive">
+                 <table class="table table-league">
+                     <thead>
+                         <tr>
+                             <th>No</th>
+                             <th>Sponsor Name</th>
+                             <th>Email</th>
+                             <th>Mobile</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr *ngFor="let s of selectedstudentsponsorsarray;let i = index">
+                             <td>{{i + 1}}</td>
+                             <td>{{s.name}}</td>
+                             <td>{{s.email}}</td>
+                             <td>
+                                 <span *ngIf="s.mobile != ''">{{s.mobile}}
+                                </span>
+                                <span *ngIf="s.mobile == ''">No Details
+                                </span>
+                                 </td>
+                                                       
+                         </tr>
+                         <tr *ngIf="selectedstudentsponsorsarray.length == 0">
+                            <td colspan="4" style="text-align: center;">No Details</td>
+                        </tr>
+                       
+                     </tbody>
+                 </table>
+             </div>
+ 
+         </div>
+         <div class="modal-footer">
+             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button type="button" [disabled]="otptext===''" (click)="fn_verifiy_otp();" class="btn btn-primary">Verify</button> -->
+         </div>
+     </div>
+ </div>
+ </div>
+
+ <!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+    <p style="color: white">Please Wait. </p>  
+    </ngx-spinner>  -->

@@ -1,0 +1,778 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>student Profile</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="">Student profile</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<!--profile cover start-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="cover-profile">
+            <div class="profile-bg-img">
+                <img class="profile-bg-img img-fluid" src="assets/images/user-profile/bg-img1.jpg" alt="bg-img">
+                <div class="card-body user-info">
+                    <div class="col-md-12">
+                        <div class="media-left">
+                            <a href="javascript:;" class="profile-image">
+                                <img class="user-img img-radius" [src]="profileimage_url" alt="user-img" onerror="this.onerror=null;this.src='assets/images/auth/no_user_img.png';">
+                            </a>
+                        </div>
+                        <div class="media-body row">
+                            <div class="col-lg-12">
+                                <div class="user-title">
+                                    <h2 style="text-transform: uppercase;">{{profiledata.name}} {{profiledata.last_name}}</h2>
+                                    <span class="text-white">Student</span>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- <div class="pull-right cover-btn">
+                                    <button type="button" class="btn btn-primary m-b-10 m-r-10"><i class="icofont icofont-plus"></i> Follow</button>
+                                    <button type="button" class="btn btn-primary m-b-10"><i class="icofont icofont-ui-messaging"></i> Message</button>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--profile cover end-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="md-tabs">
+            <ngb-tabset>
+                <ngb-tab title="Parents Details">
+                    <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                            <!-- info card start -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">Parents Details</h5>
+                                    <button id="edit-btn" type="button" class="btn btn-sm btn-primary waves-effect waves-light f-right" (click)="editstudentdetails()">
+                                        <i class="icofont icofont-edit"></i>
+                                  </button>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="general-info">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-xl-6">
+                                                        <div class="table-responsive">
+                                                            <table class="table m-0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Parent Name</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.fatherorguardian_name != null">{{profiledata.fatherorguardian_name}} {{profiledata.parent_lastname}}</span>
+                                                                            <span *ngIf="profiledata.fatherorguardian_name == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <!-- <tr>
+                                                                        <th scope="row">Ocuupation</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.parent_occupation != null">{{profiledata.parent_occupation}}</span>
+                                                                            <span *ngIf="profiledata.parent_occupation == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr> -->
+                                                                    <tr>
+                                                                        <th scope="row ">City</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.parent_city != null">{{profiledata.parent_city}}</span>
+                                                                            <span *ngIf="profiledata.parent_city == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row ">Pin code</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.parent_zip_code != null">{{profiledata.parent_zip_code}}</span>
+                                                                            <span *ngIf="profiledata.parent_zip_code == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row ">Working Status</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.work_status != null" style="text-transform: uppercase;">{{profiledata.work_status}}</span>
+                                                                            <span *ngIf="profiledata.work_status == null">No Detail</span>
+                                                                        </td>
+                                                                        </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                    <div class="col-lg-12 col-xl-6 ">
+                                                        <div class="table-responsive ">
+                                                            <table class="table ">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Parent Age</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.parent_age != null">{{profiledata.parent_age}}</span>
+                                                                            <span *ngIf="profiledata.parent_age == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Parent Mobile</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.fatherorgardian_mobile != null">{{profiledata.fatherorgardian_mobile}}</span>
+                                                                            <span *ngIf="profiledata.fatherorgardian_mobile == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row ">Address</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.parent_address_one != null">{{profiledata.parent_address_one}}{{profiledata.parent_address_two}}</span>
+                                                                            <span *ngIf="profiledata.address == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                        <th scope="row ">State</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.parent_state != null">{{profiledata.parent_state}}</span>
+                                                                            <span *ngIf="profiledata.parent_state == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    
+                                                                    
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                </div>
+                                                <!-- end of row -->
+                                                <div class="row" *ngIf="isShoworganizationdetails">
+                                                    <div class="col-lg-12">
+                                                      <div class="card-header">
+                                                          <h5 class="card-header-text">Organization Details</h5>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-xl-6">
+                                                        <div class="table-responsive">
+                                                            <table class="table m-0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Name of The Organizations</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.name_of_organizations != null">{{profiledata.name_of_organizations}}</span>
+                                                                            <span *ngIf="profiledata.name_of_organizations == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <th scope="row">Organizations Address</th>
+                                                                      <td>
+                                                                          <span *ngIf="profiledata.organizations_address_one != null">{{profiledata.organizations_address_one}} {{profiledata.organizations_address_two}}</span>
+                                                                          <span *ngIf="profiledata.organizations_address_one == null">No Detail</span>
+                                                                      </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <th scope="row">State</th>
+                                                                      <td>
+                                                                          <span *ngIf="profiledata.organizations_state != null">{{profiledata.organizations_state}}</span>
+                                                                          <span *ngIf="profiledata.organizations_state == null">No Detail</span>
+                                                                      </td>
+                                                                  </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                    <div class="col-lg-12 col-xl-6 ">
+                                                        <div class="table-responsive ">
+                                                            <table class="table ">
+                                                                <tbody>
+                                                                   
+                                                                  <tr>
+                                                                      <th scope="row">Contact of Organizations</th>
+                                                                      <td>
+                                                                          <span *ngIf="profiledata.contact_of_organizations != null">{{profiledata.contact_of_organizations}}</span>
+                                                                          <span *ngIf="profiledata.contact_of_organizations == null">No Detail</span>
+                                                                      </td>
+                                                                  </tr>
+
+                                                                  <tr>
+                                                                      <th scope="row">City</th>
+                                                                      <td>
+                                                                          <span *ngIf="profiledata.organizations_city != null">{{profiledata.organizations_city}}</span>
+                                                                          <span *ngIf="profiledata.organizations_city == null">No Detail</span>
+                                                                      </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                      <th scope="row">Pin Code</th>
+                                                                      <td>
+                                                                          <span *ngIf="profiledata.organizations_pincode != null">{{profiledata.organizations_pincode}}</span>
+                                                                          <span *ngIf="profiledata.organizations_pincode == null">No Detail</span>
+                                                                      </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                  </div>
+                                                  <div class="row">
+                                                    <div class="col-lg-12 col-xl-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table m-0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Why I Need Sponsorship:</th>
+                                                                        <td style="white-space: normal;">
+                                                                            <span *ngIf="profiledata.why_need_sponsorship != null">{{profiledata.why_need_sponsorship}}</span>
+                                                                            <span *ngIf="profiledata.why_need_sponsorship == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                                  <!-- end of row -->
+                                            </div>
+                                            <!-- end of general info -->
+                                        </div>
+                                        <!-- end of col-lg-12 -->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- info card end -->
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Student Details">
+                    <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                            <!-- personal card start -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">Student Details</h5>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <div class="view-info">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="general-info">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-xl-6">
+                                                            <div class="table-responsive">
+                                                                <table class="table m-0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row">Name</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.name != null">{{profiledata.name}} {{profiledata.last_name}}</span>
+                                                                                <span *ngIf="profiledata.name == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">Gender</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.gender != null">{{profiledata.gender}}</span>
+                                                                                <span *ngIf="profiledata.gender == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        
+
+
+                                                                        <tr>
+                                                                            <th scope=" row ">Birth Date</th>
+                                                                            <td><span *ngIf="profiledata.dateofbirth != null">{{profiledata.dateofbirth}}</span>
+                                                                                <span *ngIf="profiledata.dateofbirth == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row ">City</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.city != null">{{profiledata.city}}</span>
+                                                                                <span *ngIf="profiledata.city == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row ">Zip Code</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.zip_code != null">{{profiledata.zip_code}}</span>
+                                                                                <span *ngIf="profiledata.zip_code == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row ">Referred By</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.referred_by != null">{{profiledata.referred_by}}</span>
+                                                                                <span *ngIf="profiledata.referred_by == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end of table col-lg-6 -->
+                                                        <div class="col-lg-12 col-xl-6 ">
+                                                            <div class="table-responsive ">
+                                                                <table class="table ">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row ">Email</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.email != null">{{profiledata.email}}</span>
+                                                                                <span *ngIf="profiledata.email == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row ">Mobile Number</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.mobile != null">{{profiledata.mobile}}</span>
+                                                                                <span *ngIf="profiledata.mobile == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row ">Address</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.address != null">{{profiledata.address}}</span>
+                                                                                <span *ngIf="profiledata.address == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        
+                                                                        
+                                                                        <tr>
+                                                                            <th scope="row ">State</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.state != null">{{profiledata.state}}</span>
+                                                                                <span *ngIf="profiledata.state == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row ">Referred Contact No</th>
+                                                                            <td>
+                                                                                <span *ngIf="profiledata.referred_contact != null">{{profiledata.referred_contact}}</span>
+                                                                                <span *ngIf="profiledata.referred_contact == null">No Detail</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <!-- end of table col-lg-6 -->
+                                                    </div>
+                                                    <!-- end of row -->
+                                                </div>
+                                                <!-- end of general info -->
+                                            </div>
+                                            <!-- end of col-lg-12 -->
+                                        </div>
+                                        <!-- end of row -->
+                                    </div>
+                                   
+                                </div>
+                                <!-- end of card-body -->
+                            </div>
+                            <!-- personal card end-->
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="College Details">
+                    <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">College Details</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="general-info">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-xl-6">
+                                                        <div class="table-responsive">
+                                                            <table class="table m-0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">College Name</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.collegeofstudy != null">{{profiledata.collegeofstudy}}</span>
+                                                                            <span *ngIf="profiledata.collegeofstudy == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row ">Contact person</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.contact_person != null">{{profiledata.contact_person}}</span>
+                                                                            <span *ngIf="profiledata.contact_person == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Email</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.college_email != null">{{profiledata.college_email}}</span>
+                                                                            <span *ngIf="profiledata.college_email == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    
+                                                                    <tr>
+                                                                        <th scope="row">City</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.college_city != null">{{profiledata.college_city}}</span>
+                                                                            <span *ngIf="profiledata.college_city == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row ">Pin code</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.college_zip_code != null">{{profiledata.college_zip_code}}</span>
+                                                                            <span *ngIf="profiledata.college_zip_code == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                   
+
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                    <div class="col-lg-12 col-xl-6 ">
+                                                        <div class="table-responsive ">
+                                                            <table class="table ">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">College Phn</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.college_phone != null">{{profiledata.college_phone}}</span>
+                                                                            <span *ngIf="profiledata.college_phone == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                        <th scope="row ">Contact person Mobile</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.contact_person_mobile != null">{{profiledata.contact_person_mobile}}</span>
+                                                                            <span *ngIf="profiledata.contact_person_mobile == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Address</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.college_address != null">{{profiledata.college_address}}</span>
+                                                                            <span *ngIf="profiledata.college_address == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row ">State</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.college_state != null">{{profiledata.college_state}}</span>
+                                                                            <span *ngIf="profiledata.college_state == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-lg-12">
+                                                    <div class="card-header">
+                                                        <h5 class="card-header-text">Course Details</h5>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-xl-6">
+                                                        <div class="table-responsive">
+                                                            <table class="table m-0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Course Name</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.course_name != null">{{profiledata.course_name}}</span>
+                                                                            <span *ngIf="profiledata.course_name == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Course duration</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.study_duration != null">{{profiledata.study_duration}}</span>
+                                                                            <span *ngIf="profiledata.study_duration == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                    <div class="col-lg-12 col-xl-6 ">
+                                                        <div class="table-responsive ">
+                                                            <table class="table ">
+                                                                <tbody>
+                                                                   
+                                                                    <tr>
+                                                                        <th scope="row ">Academic Year</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.academic_year != null">{{profiledata.academic_year}}</span>
+                                                                            <span *ngIf="profiledata.academic_year == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <th scope="row">Join date</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.join_date != null">{{profiledata.join_date}}</span>
+                                                                            <span *ngIf="profiledata.join_date == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                </div>
+                                                <!-- payment schdule -->
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                      <div class="card-header">
+                                                          <h5 class="card-header-text">Payment Schedule</h5>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row">
+                                                      <div class="col-lg-12 col-xl-6">
+                                                          <div class="table-responsive">
+                                                              <table class="table m-0">
+                                                                  <tbody>
+                                                                      <tr>
+                                                                          <th scope="row">Payment type</th>
+                                                                          <td>
+                                                                              <span *ngIf="profiledata.payment_type == '1'">Monthly</span>
+                                                                                  <span *ngIf="profiledata.payment_type == '3'">Quarterly</span>
+                                                                                  <span *ngIf="profiledata.payment_type == '4'">Termly</span>
+                                                                                  <span *ngIf="profiledata.payment_type == '6'">Semester</span>
+                                                                                  <span *ngIf="profiledata.payment_type == '12'">Yearly</span>
+                                                                              <span *ngIf="profiledata.payment_type == null">No Detail</span>
+                                                                          </td>
+                                                                      </tr>
+                                                                      
+  
+  
+  
+                                                                  </tbody>
+                                                              </table>
+                                                          </div>
+                                                      </div>
+                                                      <!-- end of table col-lg-6 -->
+                                                      <div class="col-lg-12 col-xl-6 ">
+                                                          <div class="table-responsive ">
+                                                              <table class="table ">
+                                                                  <tbody>
+                                                                     
+                                                                      <tr>
+                                                                          <th scope="row ">Due date</th>
+                                                                          <td>
+                                                                              <span *ngIf="profiledata.due_date != null">{{profiledata.due_date}}</span>
+                                                                              <span *ngIf="profiledata.due_date == null">No Detail</span>
+                                                                          </td>
+                                                                      </tr>
+  
+        
+                                                                  </tbody>
+                                                              </table>
+                                                          </div>
+                                                      </div>
+                                                      <!-- end of table col-lg-6 -->
+                                                  </div>
+                                                <!-- bank details -->
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                      <div class="card-header">
+                                                          <h5 class="card-header-text">Transfer Details</h5>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row" *ngIf="isShowrtgsorneft">
+                                                      <div class="col-lg-12 col-xl-6">
+                                                          <div class="table-responsive">
+                                                              <table class="table m-0">
+                                                                  <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Transfer Type</th>
+                                                                        <td>
+                                                                            <span>RTGS (or) NEFT</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                      <tr>
+                                                                          <th scope="row">Bank Name</th>
+                                                                          <td>
+                                                                              <span *ngIf="profiledata.bank_name != null">{{profiledata.bank_name}}</span>
+                                                                              <span *ngIf="profiledata.bank_name == null">No Detail</span>
+                                                                          </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                          <th scope="row">Account No</th>
+                                                                          <td>
+                                                                              <span *ngIf="profiledata.bank_account_no != null">{{profiledata.bank_account_no}}</span>
+                                                                              <span *ngIf="profiledata.bank_account_no == null">No Detail</span>
+                                                                          </td>
+                                                                      </tr>
+  
+  
+  
+                                                                  </tbody>
+                                                              </table>
+                                                          </div>
+                                                      </div>
+                                                      <!-- end of table col-lg-6 -->
+                                                      <div class="col-lg-12 col-xl-6 ">
+                                                          <div class="table-responsive ">
+                                                              <table class="table ">
+                                                                  <tbody>
+                                                                     
+                                                                      <tr>
+                                                                          <th scope="row ">Branch Name</th>
+                                                                          <td>
+                                                                              <span *ngIf="profiledata.branch_name != null">{{profiledata.branch_name}}</span>
+                                                                              <span *ngIf="profiledata.branch_name == null">No Detail</span>
+                                                                          </td>
+                                                                      </tr>
+  
+                                                                      <tr>
+                                                                          <th scope="row">IFSC Code</th>
+                                                                          <td>
+                                                                              <span *ngIf="profiledata.ifsc_code != null">{{profiledata.ifsc_code}}</span>
+                                                                              <span *ngIf="profiledata.ifsc_code == null">No Detail</span>
+                                                                          </td>
+                                                                      </tr>
+                                                                  </tbody>
+                                                              </table>
+                                                          </div>
+                                                      </div>
+                                                      <!-- end of table col-lg-6 -->
+                                                  </div>
+                                                  <div class="row" *ngIf="isShowdd">
+                                                    <div class="col-lg-12 col-xl-6">
+                                                        <div class="table-responsive">
+                                                            <table class="table m-0">
+                                                                <tbody>
+                                                                  <tr>
+                                                                      <th scope="row">Transfer Type</th>
+                                                                      <td>
+                                                                          <span>DD</span>
+                                                                      </td>
+                                                                  </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                    <div class="col-lg-12 col-xl-6 ">
+                                                        <div class="table-responsive ">
+                                                            <table class="table ">
+                                                                <tbody>
+                                                                   
+                                                                    <tr>
+                                                                        <th scope="row ">DD Favouring</th>
+                                                                        <td>
+                                                                            <span *ngIf="profiledata.dd_favouring != null">{{profiledata.dd_favouring}}</span>
+                                                                            <span *ngIf="profiledata.dd_favouring == null">No Detail</span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end of table col-lg-6 -->
+                                                </div>
+                                                <!-- end of row -->
+                                            </div>
+                                            <!-- end of general info -->
+                                        </div>
+                                        <!-- end of col-lg-12 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Fees Details">
+                    <ng-template ngbTabContent>
+                        <div [@fadeInOutTranslate] class="m-t-15">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-header-text">Fees Details</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="general-info">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-xl-12">
+                                                        <div class="table-responsive">
+                                                            <table class="table m-0">
+                                                                <tbody>
+                                                                    <tr *ngFor="let f of fees_array">
+                                                                        <th scope="row">{{f.fees_type}}</th>
+                                                                        <td>
+                                                                            <span> <i  class="fas fa-rupee-sign"></i> {{f.per_sem}}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                                
+                                                <!-- end of row -->
+                                            </div>
+                                            <!-- end of general info -->
+                                        </div>
+                                        <!-- end of col-lg-12 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</div>

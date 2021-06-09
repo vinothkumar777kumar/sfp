@@ -1,0 +1,139 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Sponsors</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/sponsors-list']">Sponsors</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card {{ fullCard }} {{ cardLoad }}" [ngClass]="cardClass">
+            <div class="card-header">
+                <h5 class="card-header-text">Sponsors List</h5>
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" [routerLink]="['/add-sponsors']"><i  class="icofont icofont-plus"></i></button>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Sponsor Name</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <!-- <th>Address</th> -->
+                                <th>Sponsord Student</th>
+                                <th>Change Passowrd</th>
+                                <!-- <th>Balance</th> -->
+                                <!-- <th>View Transaction</th> -->
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of sponsorsarray;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td>{{s.name}}</td>
+                                <td>{{s.mobile}}</td>
+                                <td>{{s.email}}</td>
+                                <!-- <td>{{s.address}} {{s.address_two}}</td> -->
+                                <td>
+                                    <a href="javascript:void(0)" (click)="view_sponsord_student(s)"><i class="fa fa-eye"></i></a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="changepassword(s)"><i class="fa fa-edit"></i></a>
+                                </td>
+                                <!-- <td><i class="fa fa-inr"></i> {{s.bal}}</td> -->
+                                <!-- <td>
+                                    <a href="javascript:void(0)" (click)="viewtransactiondetails(s)">
+                                        <span  class="label label-primary"><i class="fa fa-eye"></i></span>
+                                    </a>
+                                </td> -->
+                                <td>
+                                    <a href="javascript:void(0)" (click)="edit_sponsor(s)"><i class="fa fa-edit"></i></a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="delete_sponsor(s)"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr *ngIf="emptysponsorarray" style="text-align: center;">
+                                <td colspan="8">No Data Found</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="sponsortransactionmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-xl" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="sponsortransactionmodal">
+                Transaction Details</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+             </button>
+         </div>
+         <div class="modal-body">
+        
+              <div class="table-responsive">
+                 <table class="table table-league">
+                     <thead>
+                         <tr>
+                             <th>No</th>
+                             <th>Amount</th>
+                             <th>Date</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr *ngFor="let t of transactiondata;let i = index">
+                             <td>{{i + 1}}</td>
+                             <td><i class="fa fa-inr"></i> {{t.amount}}</td>
+                             <td>{{t.date}}</td>                              
+                         </tr>
+                       
+                     </tbody>
+                 </table>
+             </div>
+ 
+         </div>
+         <div class="modal-footer">
+             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button type="button" [disabled]="otptext===''" (click)="fn_verifiy_otp();" class="btn btn-primary">Verify</button> -->
+         </div>
+     </div>
+ </div>
+ </div>

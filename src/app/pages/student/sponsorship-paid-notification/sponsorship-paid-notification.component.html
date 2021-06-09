@@ -1,0 +1,83 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-user bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>All Notification</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/sponsors-list']">Notification</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card {{ fullCard }} {{ cardLoad }}" [ngClass]="cardClass">
+            <div class="card-header">
+                <h5 class="card-header-text">Notifications</h5>
+                <!-- <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" [routerLink]="['/add-sponsors']"><i  class="icofont icofont-plus"></i></button> -->
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <!-- <th>Student Name</th> -->
+                                <th>Sponsor Name</th>
+                                <th>Pay Date</th>
+                                <th>Paid Amount</th>
+                                <!-- <th>Edit</th>
+                                <th>Delete</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of notificationdata;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <!-- <td>{{s.student_name}}</td> -->
+                                <td>{{s.sponsor_name}}</td>
+                                <td>{{s.paydate}}</td>
+                                <td><i class="fa fa-inr"></i> {{s.paid_amt}}</td>
+                                
+                                
+                               
+                                <!-- <td>
+                                    <a href="javascript:void(0)" (click)="edit_sponsor(s)"><i class="fa fa-edit"></i></a>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" (click)="delete_sponsor(s)"><i class="fa fa-trash"></i></a>
+                                </td> -->
+                            </tr>
+                            <!-- <tr *ngIf="notificationdata.length == 0" style="text-align: center;">
+                                <td colspan="4">No Data Found</td>
+                            </tr> -->
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

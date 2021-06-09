@@ -1,0 +1,89 @@
+<!-- Page-header start -->
+<div class="">
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <span><i class="icofont icofont-wallet bg-c-blue card1-icon"></i></span>
+                    <div class="d-inline">
+                        <span class="d-block"><h4>Transaction</h4></span>
+                        <!-- <span>student</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a [routerLink]="['/admin-dashboard']">
+                                <i class="icofont icofont-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a >Transaction</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+<div class="row">
+    <div class="col-sm-12">
+        <!-- Hover table card start -->
+        <div class="card {{ fullCard }} {{ cardLoad }}" [ngClass]="cardClass">
+            <div class="card-header">
+                <h5 class="card-header-text">Transaction</h5>
+                <!-- <h5 class="card-header-text">Transaction - <i class="icofont icofont-wallet bg-c-blue card1-icon" style="font-size:18px;padding:8px;color:#fff;border-radius: 20px;">&nbsp;&nbsp;<i class="fa fa-inr" style="font-size: 16px;"></i>{{main_balance}}</i></h5> -->
+                <button class="btn btn-sm btn-primary waves-effect waves-light f-right" id="edit-btn" type="button" [routerLink]="['/add-wallet-transation']"><i class="icofont icofont-plus"></i></button>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let t of transationarray;let i = index">
+                                <th scope="row">{{i + 1}}</th>
+                                <td><i class="fa fa-inr"></i> {{t.amount}}</td>
+                                <td>{{t.date}}</td>
+                                <td>
+                                    <span *ngIf="t.status == 1" class="label label-primary">Approved</span>
+                                    <span *ngIf="t.status == 2" class="label label-warning">Pending</span>
+                                </td>
+                                <td>
+                                  
+                                    <button style="border: none;" [attr.disabled]="t.status == 1 ? true : null" href="javascript:void(0)" (click)="edittransaction(t)">
+                                        <span  class="label label-primary"><i class="icofont icofont-edit"></i></span>
+                                    </button>
+                                </td>
+                                <td>
+                                  
+                                    <button style="border: none;" [attr.disabled]="t.status == 1 ? true : null" href="javascript:void(0)" (click)="deletetransaction(t)">
+                                        <span  class="label label-primary"><i class="fa fa-trash"></i></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="emtytransationarray" style="text-align: center;">
+                                <td colspan="7">No Data Found</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
